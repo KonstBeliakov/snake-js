@@ -9,13 +9,20 @@ export let Snake = {
     direction: null,
 
     draw(canvas){
-        var snake_ctx = canvas.getContext("2d");
-        snake_ctx.beginPath();
-        snake_ctx.fillStyle = '#00ff00';
-        for(let square of this.position){
-            snake_ctx.rect(square[0] * (squareSize + 2), square[1] * (squareSize + 2), squareSize, squareSize)
+        var snake_ctxs = [];
+        for(let i = 0; i < this.position.length;i ++){
+            snake_ctxs.push(canvas.getContext("2d"))
+            snake_ctxs[i].beginPath();
+            let g = 255 - i * 10;
+            snake_ctxs[i].fillStyle = `rgb(0, ${g}, 0)`;
+
+            let x = this.position[i][0] * (squareSize + 2);
+            let y = this.position[i][1] * (squareSize + 2);
+
+            snake_ctxs[i].rect(x, y, squareSize, squareSize)
+            snake_ctxs[i].fill()
         }
-        snake_ctx.fill()
+
     },
 
     updateDirection(key){
@@ -36,7 +43,7 @@ export let Snake = {
         console.log(`snake direction: ${this.direction}`)
     },
 
-    update(){
+    update(foodX, foodY){
         console.log('snake update')
         let [headX, headY] = this.position[0];
         switch(this.direction) {
@@ -53,7 +60,9 @@ export let Snake = {
                 this.position.unshift([headX, headY - 1]);
                 break;
         }
-        if(this.direction !== null){
+        [headX, headY] = this.position[0];
+
+        if(this.direction !== null && !(foodX === headX && foodY === headY)){
             this.position.pop();
         }
     },
