@@ -1,4 +1,22 @@
 import {Board} from './board.js'
+import {levels} from './levels.js'
+
+export function update_level_description(level){
+    console.log(`update level description. level: ${level}`)
+
+    const level_info = document.getElementById("level_info");
+    level_info.innerHTML = '';
+
+    let level_name = document.createElement("h2");
+    level_name.textContent = levels[level].name;
+
+    let level_description = document.createElement("p");
+    level_description.textContent = levels[level].description;
+
+    level_info.append(level_name)
+    level_info.append(level_description)
+}
+
 
 var buttons = [];
 for(let i = 0;i < 10;i ++){
@@ -9,6 +27,7 @@ for(let i = 0;i < 10;i ++){
         document.getElementById('levels').style.display = 'none';
 
         console.log(`level chosen: ${i + 1}`);
+
         Board.init(i + 1);
         Board.main_loop();
     });

@@ -1,18 +1,22 @@
 import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
+import {levels} from './levels.js'
+import {update_level_description} from './main.js'
 
 
 export let Board = {
-    squares: [],
-    running: true,
-    foodX: 8,
-    foodY: 5,
     snake: Snake,
     canvas: document.getElementById('Canvas'),
-    delay: 100,
 
     init(level){
-        this.delay = 150 * 0.85 ** (level - 1);
+        update_level_description(level);
+        this.level = level;
+        this.delay = levels[level].delay;
+        this.snake.init(level);
+        this.next_level = false;
+        this.foodX = 5;
+        this.foodY = 8;
+        this.running = true;
     },
 
     drawFood(){
@@ -75,6 +79,10 @@ export let Board = {
                             }
                         }
                     }
+                }
+                if(levels[this.level].next_level_requirements(this.snake)){
+                    this.level++;
+                    this.init(this.level);
                 }
                 this.next_tick();
             }, this.delay)

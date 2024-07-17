@@ -5,8 +5,10 @@ import {
 } from './settings.js'
 
 export let Snake = {
-    position: [[6, 5], [5, 5], [4, 5]],
-    direction: null,
+    init(level){
+        this.position = [[6, 5], [5, 5], [4, 5]];
+        this.direction = null;
+    },
 
     draw(canvas){
         var snake_ctxs = [];
