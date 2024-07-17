@@ -9,6 +9,11 @@ export let Board = {
     foodY: 5,
     snake: Snake,
     canvas: document.getElementById('Canvas'),
+    delay: 100,
+
+    init(level){
+        this.delay = 150 * 0.85 ** (level - 1);
+    },
 
     drawFood(){
         const food_ctx = this.canvas.getContext("2d");
@@ -72,7 +77,7 @@ export let Board = {
                     }
                 }
                 this.next_tick();
-            }, 100)
+            }, this.delay)
         }
     },
 }
