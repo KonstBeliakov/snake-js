@@ -4,6 +4,7 @@ import {boardSizeX, boardSizeY, squareSize} from "./settings.js";
 // --------------- CONSTANTS ---------------
 export const APPLE = 0;
 export const ACCELERATING_APPLE = 1;
+export const SLOWING_APPLE = 2;
 // -----------------------------------------
 
 
@@ -25,6 +26,9 @@ export let Item = {
                 break;
             case ACCELERATING_APPLE:
                 this.item_ctx.fillStyle = '#3333cc';
+                break;
+            case SLOWING_APPLE:
+                this.item_ctx.fillStyle = '#cccc33'
                 break;
         }
 

@@ -3,8 +3,8 @@ import {
     boardSizeY,
     squareSize,
 } from './settings.js'
-import {ACCELERATING_APPLE} from "./item.js";
-import {ACCELERATED, Effect} from "./effect.js";
+import {ACCELERATING_APPLE, SLOWING_APPLE} from "./item.js";
+import {FAST, Effect, SLOW} from "./effect.js";
 import {levels} from "./levels.js";
 
 
@@ -75,9 +75,12 @@ export let Snake = {
         [headX, headY] = this.position[0];
 
         if(item.x === headX && item.y === headY){
-            if(item.type === ACCELERATING_APPLE) {
-                this.effects.unshift(Effect);
-                this.effects[0].init(ACCELERATED, this);
+            this.effects.unshift(Effect);
+            switch (item.type){
+                case ACCELERATING_APPLE:
+                    this.effects[0].init(FAST, this);
+                case SLOWING_APPLE:
+                    this.effects[0].init(SLOW, this)
             }
         }else if(this.direction !== null){
             this.position.pop();

@@ -1,5 +1,6 @@
 // --------------- CONSTANTS ---------------
-export const ACCELERATED = 0;
+export const FAST = 0;
+export const SLOW = 1;
 // -----------------------------------------
 
 
@@ -8,7 +9,14 @@ export let Effect = {
 
     init(type, snake){
         this.type = type;
-        if(type === ACCELERATED)
-            snake.speed *= 1.5;
+        switch(type){
+            case FAST:
+                snake.speed *= 1.5;
+                break;
+            case SLOW:
+                snake.speed /= 1.5;
+                break;
+        }
+
     }
 }

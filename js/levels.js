@@ -1,3 +1,6 @@
+import {ACCELERATING_APPLE, APPLE, SLOWING_APPLE} from "./item.js";
+import {SLOW} from "./effect.js";
+
 
 export const levels = [
     {},
@@ -9,6 +12,7 @@ export const levels = [
             return snake.position.length >= 6;
         },
         board: null,
+        items: [[APPLE, 100]]
     },
     {
         name: "Level 2: Little faster",
@@ -18,6 +22,7 @@ export const levels = [
             return snake.position.length >= 8;
         },
         board: null,
+        items: [[APPLE, 100]]
     },
     {
         name: "Level 3: Even faster",
@@ -27,6 +32,7 @@ export const levels = [
             return snake.position.length >= 10;
         },
         board: null,
+        items: [[APPLE, 100]]
     },
     {
         name: "Level 4: Walls",
@@ -51,8 +57,8 @@ export const levels = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]
-
+        ],
+        items: [[APPLE, 100]]
     },
     {
         name: "Level 5: Cramped room",
@@ -77,8 +83,8 @@ export const levels = [
             [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        ]
-
+        ],
+        items: [[APPLE, 100]]
     },
     {
         name: "Level 6: Fast food",
@@ -88,7 +94,18 @@ export const levels = [
             return snake.position.length >= 11;
         },
         board: null,
-        first_apple: 'fast',
-        fast_apples: true,
+        first_apple: ACCELERATING_APPLE,
+        items: [[APPLE, 50], [ACCELERATING_APPLE, 50]]
     },
+    {
+        name: "Level 7: Let's slow down",
+        description: "Yellow apples slow down the snake for a while. Try to eat 8 apples.",
+        speed: 12,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: null,
+        first_apple: SLOWING_APPLE,
+        items: [[SLOWING_APPLE, 40], [APPLE, 30], [ACCELERATING_APPLE, 30]]
+    }
 ]
