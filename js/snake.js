@@ -31,15 +31,19 @@ export let Snake = {
     updateDirection(key){
         switch (key){
             case 'w':
-                this.direction = "up";
+                if(this.direction !== 'down')
+                    this.direction = "up";
                 break
             case 'd':
-                this.direction = 'right';
+                if(this.direction !== 'left')
+                    this.direction = 'right';
                 break
             case 's':
-                this.direction = 'down';
+                if(this.direction !== 'up')
+                    this.direction = 'down';
                 break
             case 'a':
+                if(this.direction !== 'right' && this.direction !== null)
                 this.direction = 'left'
                 break
         }

@@ -111,6 +111,8 @@ export let Board = {
                                 break;
                             }
                         }
+                        if(this.squares[this.foodX][this.foodY] !== 0)
+                            good_position = false
                     }
                 }
                 if(levels[this.level].next_level_requirements(this.snake)){
