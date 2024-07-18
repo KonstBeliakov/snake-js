@@ -7,6 +7,7 @@ import {update_level_description} from './main.js'
 export let Board = {
     snake: Snake,
     canvas: document.getElementById('Canvas'),
+    squares: null,
 
     init(level){
         update_level_description(level);
@@ -17,6 +18,23 @@ export let Board = {
         this.foodX = 5;
         this.foodY = 8;
         this.running = true;
+
+        if(levels[level].board !== null){
+            console.log('board loaded')
+            this.squares = levels[level].board;
+        }else{
+            console.log('bord didn\'t load')
+            this.squares = []
+            for(let i = 0;i < boardSizeY;i ++){
+                let t = []
+                for(let j = 0;j < boardSizeX;j ++){
+                    t.push(0)
+                }
+                this.squares.push(t)
+            }
+        }
+
+        console.log(this.squares)
     },
 
     drawFood(){
@@ -28,15 +46,30 @@ export let Board = {
     },
 
     draw(canvas) {
+        // drawing empty squares of the board
         const board_ctx = this.canvas.getContext("2d");
         board_ctx.beginPath();
         board_ctx.fillStyle = '#666666';
+
         for(let i = 0;i < boardSizeX;i ++){
             for(let j = 0;j < boardSizeY;j ++){
-                board_ctx.rect(i * (squareSize + 2), j * (squareSize + 2), squareSize, squareSize);
+                if(this.squares[i][j] !== 1)
+                    board_ctx.rect(i * (squareSize + 2), j * (squareSize + 2), squareSize, squareSize);
             }
         }
         board_ctx.fill()
+
+        // drawing walls
+        const wall_ctx = this.canvas.getContext("2d");
+        wall_ctx.beginPath();
+        wall_ctx.fillStyle = '#222222';
+        for(let i = 0;i < boardSizeX;i ++){
+            for(let j = 0;j < boardSizeY;j ++){
+                if(this.squares[i][j] === 1)
+                    wall_ctx.rect(i * (squareSize + 2), j * (squareSize + 2), squareSize, squareSize)
+            }
+        }
+        wall_ctx.fill()
 
         this.drawFood(canvas);
     },
@@ -63,7 +96,7 @@ export let Board = {
                 this.snake.draw(this.canvas);
                 this.drawFood();
                 this.snake.update(this.foodX, this.foodY);
-                this.running = this.snake.checkGameOver();
+                this.running = this.snake.checkGameOver(this);
 
                 if (this.foodX === this.snake.position[0][0] && this.foodY === this.snake.position[0][1]){
                     let good_position = false

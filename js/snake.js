@@ -3,6 +3,7 @@ import {
     boardSizeY,
     squareSize,
 } from './settings.js'
+import {Board} from './board.js'
 
 export let Snake = {
     init(level){
@@ -69,15 +70,16 @@ export let Snake = {
         }
     },
 
-    checkGameOver(){
+    checkGameOver(board){
         let headX = this.position[0][0];
         let headY = this.position[0][1];
 
         for(let i = 1;i < this.position.length;i++){
-            if(headX === this.position[i][0] && headY === this.position[i][1]){
+            if(headX === this.position[i][0] && headY === this.position[i][1])
                 return false
-            }
         }
+        if(board.squares != null && board.squares[headX][headY] === 1)
+            return false
 
         return !(headX < 0 || headX >= boardSizeX || headY < 0 || headY >= boardSizeY);
     }
