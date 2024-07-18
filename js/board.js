@@ -1,23 +1,19 @@
 import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
 import {levels} from './levels.js'
-import {Item, APPLE, ACCELERATING_APPLE} from './item.js'
+import {Item, APPLE} from './item.js'
 import {update_level_description} from './main.js'
 import {generate_random} from './utils.js'
 
 
-export let Board = {
-    snake: Snake,
-    canvas: document.getElementById('Canvas'),
-    squares: null,
-
-    init(level){
+export class Board{
+    constructor(level){
+        this.canvas = document.getElementById('Canvas');
         update_level_description(level);
         this.level = level;
-        this.snake.init(level);
+        this.snake = new Snake(level);
         this.next_level = false;
-        this.item = Item;
-        this.item.init(5, 8, APPLE, this.canvas);
+        this.item = new Item(5, 8, APPLE, this.canvas);
         this.running = true;
 
         if(levels[level].board !== null){
@@ -35,11 +31,11 @@ export let Board = {
         }
 
         console.log(this.squares)
-    },
+    }
 
     drawFood(){
         this.item.draw(this.canvas)
-    },
+    }
 
     draw(canvas) {
         // drawing empty squares of the board
@@ -68,7 +64,7 @@ export let Board = {
         wall_ctx.fill()
 
         this.drawFood(canvas);
-    },
+    }
 
     main_loop(){
         document.body.addEventListener('keydown', (ev) => {
@@ -76,7 +72,7 @@ export let Board = {
             this.snake.updateDirection(ev.key);
         });
         this.next_tick()
-    },
+    }
 
     next_tick(){
         if(!this.running) { // game over
@@ -99,13 +95,12 @@ export let Board = {
                     this.item.change_type(generate_random(levels[this.level].items))
                 }
 
-                if(levels[this.level].next_level_requirements(this.snake)){
-                    this.level++;
-                    this.init(this.level);
-                }
+                if(levels[this.level].next_level_requirements(this.snake))
+                    this.constructor(this.level + 1);
+
                 this.next_tick();
             }, (1000 / this.snake.speed));
         }
-    },
+    }
 }
 

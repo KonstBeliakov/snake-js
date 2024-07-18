@@ -4,10 +4,8 @@ export const SLOW = 1;
 // -----------------------------------------
 
 
-export let Effect = {
-    type: null,
-
-    init(type, snake){
+export class Effect{
+    constructor(type, snake){
         this.type = type;
         switch(type){
             case FAST:
@@ -17,6 +15,5 @@ export let Effect = {
                 snake.speed /= 1.5;
                 break;
         }
-
     }
 }

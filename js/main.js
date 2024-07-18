@@ -28,8 +28,8 @@ for(let i = 0;i < 10;i ++){
 
         console.log(`level chosen: ${i + 1}`);
 
-        Board.init(i + 1);
-        Board.main_loop();
+        const board = new Board(i + 1);
+        board.main_loop();
     });
 
     document.getElementById('levels').append(buttons[i]);

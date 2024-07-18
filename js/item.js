@@ -8,13 +8,13 @@ export const SLOWING_APPLE = 2;
 // -----------------------------------------
 
 
-export let Item = {
-    init(x, y, type, canvas){
+export class Item{
+    constructor(x, y, type, canvas){
         this.x = x;
         this.y = y;
         this.type = type;
         this.canvas = canvas;
-    },
+    }
 
     draw(){
         this.item_ctx = this.canvas.getContext("2d");
@@ -34,7 +34,7 @@ export let Item = {
 
         this.item_ctx.rect(this.x * (squareSize + 2), this.y * (squareSize + 2), squareSize, squareSize);
         this.item_ctx.fill();
-    },
+    }
 
     move(board){
         let good_position = false
@@ -52,9 +52,9 @@ export let Item = {
             if(board.squares[this.x][this.y] !== 0)
                 good_position = false
         }
-    },
+    }
 
     change_type(type) {
         this.type = type;
-    },
+    }
 }

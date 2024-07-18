@@ -8,13 +8,13 @@ import {FAST, Effect, SLOW} from "./effect.js";
 import {levels} from "./levels.js";
 
 
-export let Snake = {
-    init(level){
+export class Snake {
+    constructor(level){
         this.position = [[6, 5], [5, 5], [4, 5]];
         this.direction = null;
         this.effects = [];
         this.speed = levels[level].speed;
-    },
+    }
 
     draw(canvas){
         var snake_ctxs = [];
@@ -30,8 +30,7 @@ export let Snake = {
             snake_ctxs[i].rect(x, y, squareSize, squareSize)
             snake_ctxs[i].fill()
         }
-
-    },
+    }
 
     updateDirection(key){
         switch (key){
@@ -53,7 +52,7 @@ export let Snake = {
                 break
         }
         console.log(`snake direction: ${this.direction}`)
-    },
+    }
 
     update(item){
         console.log('snake update')
@@ -75,17 +74,18 @@ export let Snake = {
         [headX, headY] = this.position[0];
 
         if(item.x === headX && item.y === headY){
-            this.effects.unshift(Effect);
             switch (item.type){
                 case ACCELERATING_APPLE:
-                    this.effects[0].init(FAST, this);
+                    this.effects.unshift(new Effect(FAST, this));
+                    break;
                 case SLOWING_APPLE:
-                    this.effects[0].init(SLOW, this)
+                    this.effects.unshift(new Effect(SLOW, this));
+                    break;
             }
         }else if(this.direction !== null){
             this.position.pop();
         }
-    },
+    }
 
     checkGameOver(board){
         let headX = this.position[0][0];
