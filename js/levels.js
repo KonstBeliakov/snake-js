@@ -4,7 +4,7 @@ export const levels = [
     {
         name: "Level 1: Basic snake",
         description: "You need to eat apples to grow. Eat 3 apples to go to the level 2.",
-        delay: 150,
+        speed: 7,
         next_level_requirements(snake){
             return snake.position.length >= 6;
         },
@@ -13,7 +13,7 @@ export const levels = [
     {
         name: "Level 2: Little faster",
         description: "Increasing the speed. Try eating 5 apples.",
-        delay: 100,
+        speed: 10,
         next_level_requirements(snake){
             return snake.position.length >= 8;
         },
@@ -22,7 +22,7 @@ export const levels = [
     {
         name: "Level 3: Even faster",
         description: "Speed is increasing again. Eat 7 apples to proceed.",
-        delay: 75,
+        speed: 13,
         next_level_requirements(snake){
             return snake.position.length >= 10;
         },
@@ -31,7 +31,7 @@ export const levels = [
     {
         name: "Level 4: Walls",
         description: "Don't crash into the walls! Try eating 7 apples",
-        delay: 100,
+        speed: 10,
         next_level_requirements(snake){
             return snake.position.length >= 10;
         },
@@ -57,7 +57,7 @@ export const levels = [
     {
         name: "Level 5: Cramped room",
         description: "Don't crash into the walls! Try eating 8 apples",
-        delay: 100,
+        speed: 10,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
@@ -79,5 +79,16 @@ export const levels = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ]
 
+    },
+    {
+        name: "Level 6: Fast food",
+        description: "Blue apples speed up the snake for a while. Try to eat 8 apples.",
+        speed: 10,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: null,
+        first_apple: 'fast',
+        fast_apples: true,
     },
 ]

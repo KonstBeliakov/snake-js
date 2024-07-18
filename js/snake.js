@@ -3,12 +3,17 @@ import {
     boardSizeY,
     squareSize,
 } from './settings.js'
-import {Board} from './board.js'
+import {ACCELERATING_APPLE} from "./item.js";
+import {ACCELERATED, Effect} from "./effect.js";
+import {levels} from "./levels.js";
+
 
 export let Snake = {
     init(level){
         this.position = [[6, 5], [5, 5], [4, 5]];
         this.direction = null;
+        this.effects = [];
+        this.speed = levels[level].speed;
     },
 
     draw(canvas){
@@ -50,7 +55,7 @@ export let Snake = {
         console.log(`snake direction: ${this.direction}`)
     },
 
-    update(foodX, foodY){
+    update(item){
         console.log('snake update')
         let [headX, headY] = this.position[0];
         switch(this.direction) {
@@ -69,7 +74,12 @@ export let Snake = {
         }
         [headX, headY] = this.position[0];
 
-        if(this.direction !== null && !(foodX === headX && foodY === headY)){
+        if(item.x === headX && item.y === headY){
+            if(item.type === ACCELERATING_APPLE) {
+                this.effects.unshift(Effect);
+                this.effects[0].init(ACCELERATED, this);
+            }
+        }else if(this.direction !== null){
             this.position.pop();
         }
     },

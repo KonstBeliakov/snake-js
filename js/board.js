@@ -1,6 +1,7 @@
 import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
 import {levels} from './levels.js'
+import {Item, APPLE, ACCELERATING_APPLE} from './item.js'
 import {update_level_description} from './main.js'
 
 
@@ -12,11 +13,10 @@ export let Board = {
     init(level){
         update_level_description(level);
         this.level = level;
-        this.delay = levels[level].delay;
         this.snake.init(level);
         this.next_level = false;
-        this.foodX = 5;
-        this.foodY = 8;
+        this.item = Item;
+        this.item.init(5, 8, APPLE, this.canvas);
         this.running = true;
 
         if(levels[level].board !== null){
@@ -27,9 +27,8 @@ export let Board = {
             this.squares = []
             for(let i = 0;i < boardSizeY;i ++){
                 let t = []
-                for(let j = 0;j < boardSizeX;j ++){
+                for(let j = 0;j < boardSizeX;j ++)
                     t.push(0)
-                }
                 this.squares.push(t)
             }
         }
@@ -38,11 +37,7 @@ export let Board = {
     },
 
     drawFood(){
-        const food_ctx = this.canvas.getContext("2d");
-        food_ctx.beginPath();
-        food_ctx.fillStyle = '#ff1111';
-        food_ctx.rect(this.foodX * (squareSize + 2), this.foodY * (squareSize + 2), squareSize, squareSize)
-        food_ctx.fill()
+        this.item.draw(this.canvas)
     },
 
     draw(canvas) {
@@ -91,36 +86,27 @@ export let Board = {
             };
             img.src = "/game_over.png";
         }else{
-            setTimeout(() =>{
+            setTimeout(() => {
                 this.draw();
                 this.snake.draw(this.canvas);
                 this.drawFood();
-                this.snake.update(this.foodX, this.foodY);
+                this.snake.update(this.item);
                 this.running = this.snake.checkGameOver(this);
 
-                if (this.foodX === this.snake.position[0][0] && this.foodY === this.snake.position[0][1]){
-                    let good_position = false
-                    while(!good_position){
-                        this.foodX = Math.floor(Math.random() * boardSizeX)
-                        this.foodY = Math.floor(Math.random() * boardSizeY)
-
-                        good_position = true
-                        for(let square of this.snake.position){
-                            if(square[0] === this.foodX && square[1] === this.foodY){
-                                good_position = false;
-                                break;
-                            }
-                        }
-                        if(this.squares[this.foodX][this.foodY] !== 0)
-                            good_position = false
-                    }
+                if (this.item.x === this.snake.position[0][0] && this.item.y === this.snake.position[0][1]){
+                    this.item.move(this);
+                    if(levels[this.level].fast_apples && Math.random() * 2 > 1)
+                        this.item.change_type(ACCELERATING_APPLE)
+                    else
+                        this.item.change_type(APPLE)
                 }
+
                 if(levels[this.level].next_level_requirements(this.snake)){
                     this.level++;
                     this.init(this.level);
                 }
                 this.next_tick();
-            }, this.delay)
+            }, (1000 / this.snake.speed));
         }
     },
 }
