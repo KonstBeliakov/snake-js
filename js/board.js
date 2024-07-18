@@ -12,8 +12,13 @@ export class Board{
         update_level_description(level);
         this.level = level;
         this.snake = new Snake(level);
-        this.next_level = false;
-        this.item = new Item(5, 8, APPLE, this.canvas);
+
+        if(levels[level].first_item){
+            this.item = new Item(5, 8, levels[level].first_item, this.canvas);
+        }else{
+            this.item = new Item(5, 8, APPLE, this.canvas);
+        }
+
         this.running = true;
 
         if(levels[level].board !== null){

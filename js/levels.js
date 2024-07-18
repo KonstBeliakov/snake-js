@@ -1,5 +1,4 @@
 import {ACCELERATING_APPLE, APPLE, SLOWING_APPLE} from "./item.js";
-import {SLOW} from "./effect.js";
 
 
 export const levels = [
@@ -95,7 +94,7 @@ export const levels = [
         },
         board: null,
         first_apple: ACCELERATING_APPLE,
-        items: [[APPLE, 50], [ACCELERATING_APPLE, 50]]
+        items: [[APPLE, 40], [ACCELERATING_APPLE, 60]]
     },
     {
         name: "Level 7: Let's slow down",
@@ -105,7 +104,34 @@ export const levels = [
             return snake.position.length >= 11;
         },
         board: null,
-        first_apple: SLOWING_APPLE,
-        items: [[SLOWING_APPLE, 40], [APPLE, 30], [ACCELERATING_APPLE, 30]]
-    }
+        first_item: SLOWING_APPLE,
+        items: [[SLOWING_APPLE, 60], [APPLE, 30], [ACCELERATING_APPLE, 10]]
+    },
+    {
+        name: "Level 8: Narrow passage",
+        description: "Can you play with high precision at varying speeds? You need to eat 8 apples to pass.",
+        speed: 10,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: [
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        first_apple: ACCELERATING_APPLE,
+        items: [[SLOWING_APPLE, 30], [APPLE, 30], [ACCELERATING_APPLE, 40]]
+    },
 ]
