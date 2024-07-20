@@ -45,3 +45,9 @@ h1{
 .special-level{
     background: linear-gradient(to bottom, #eeeeaa, #ffccaa);
 }
+
+progress{
+    width: 780px;
+    background: #cc3333; /* don't work somehow */
+    margin-bottom: 20px;
+}

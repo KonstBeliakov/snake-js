@@ -6,6 +6,7 @@ import {
 import {ACCELERATING_APPLE, SLOWING_APPLE} from "./item.js";
 import {FAST, Effect, SLOW} from "./effect.js";
 import {levels} from "./levels.js";
+import {show_level_progress} from "./utils.js";
 
 
 export class Snake {
@@ -74,6 +75,7 @@ export class Snake {
         [headX, headY] = this.position[0];
 
         if(item.x === headX && item.y === headY){
+            show_level_progress(this.position.length - 3);
             switch (item.type){
                 case ACCELERATING_APPLE:
                     this.effects.unshift(new Effect(FAST, this));

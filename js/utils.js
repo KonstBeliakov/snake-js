@@ -16,7 +16,6 @@ export function generate_random(items){
     }
 }
 
-
 export function update_level_description(level){
     console.log(`update level description. level: ${level}`)
 
@@ -29,6 +28,17 @@ export function update_level_description(level){
     let level_description = document.createElement("p");
     level_description.textContent = levels[level].description;
 
-    level_info.append(level_name)
-    level_info.append(level_description)
+    let progress_bar = document.createElement("progress");
+    progress_bar.value = 0;
+    progress_bar.max = levels[level].max - 3;
+    progress_bar.setAttribute("id", "level_progress_bar");
+
+    level_info.append(level_name);
+    level_info.append(level_description);
+    level_info.append(progress_bar);
+}
+
+export function show_level_progress(value){
+    let progress_bar = document.getElementById("level_progress_bar");
+    progress_bar.value = value;
 }

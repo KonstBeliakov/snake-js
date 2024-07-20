@@ -8,6 +8,7 @@ export const levels = [
         special: true,
         description: "You need to eat apples to grow. Eat 3 apples to go to the level 2.",
         speed: 7,
+        max: 6,
         next_level_requirements(snake){
             return snake.position.length >= 6;
         },
@@ -18,6 +19,7 @@ export const levels = [
         name: "Level 2: Little faster",
         description: "Increasing the speed. Try eating 5 apples.",
         speed: 10,
+        max: 8,
         next_level_requirements(snake){
             return snake.position.length >= 8;
         },
@@ -28,6 +30,7 @@ export const levels = [
         name: "Level 3: Even faster",
         description: "Speed is increasing again. Eat 7 apples to proceed.",
         speed: 13,
+        max: 10,
         next_level_requirements(snake){
             return snake.position.length >= 10;
         },
@@ -39,6 +42,7 @@ export const levels = [
         special: true,
         description: "Don't crash into the walls! Try eating 7 apples",
         speed: 10,
+        max: 10,
         next_level_requirements(snake){
             return snake.position.length >= 10;
         },
@@ -65,6 +69,7 @@ export const levels = [
         name: "Level 5: Cramped room",
         description: "Don't crash into the walls! Try eating 8 apples",
         speed: 10,
+        max: 11,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
@@ -92,6 +97,7 @@ export const levels = [
         special: true,
         description: "Blue apples speed up the snake for a while. Try to eat 8 apples.",
         speed: 10,
+        max: 11,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
@@ -104,6 +110,7 @@ export const levels = [
         special: true,
         description: "Yellow apples slow down the snake for a while. Try to eat 8 apples.",
         speed: 12,
+        max: 11,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
@@ -115,6 +122,7 @@ export const levels = [
         name: "Level 8: Narrow passage",
         description: "Can you play with high precision at varying speeds? You need to eat 8 apples to pass.",
         speed: 10,
+        max: 11,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
