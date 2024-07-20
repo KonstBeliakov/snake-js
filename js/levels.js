@@ -5,6 +5,7 @@ export const levels = [
     {},
     {
         name: "Level 1: Basic snake",
+        special: true,
         description: "You need to eat apples to grow. Eat 3 apples to go to the level 2.",
         speed: 7,
         next_level_requirements(snake){
@@ -35,6 +36,7 @@ export const levels = [
     },
     {
         name: "Level 4: Walls",
+        special: true,
         description: "Don't crash into the walls! Try eating 7 apples",
         speed: 10,
         next_level_requirements(snake){
@@ -87,6 +89,7 @@ export const levels = [
     },
     {
         name: "Level 6: Fast food",
+        special: true,
         description: "Blue apples speed up the snake for a while. Try to eat 8 apples.",
         speed: 10,
         next_level_requirements(snake){
@@ -98,6 +101,7 @@ export const levels = [
     },
     {
         name: "Level 7: Let's slow down",
+        special: true,
         description: "Yellow apples slow down the snake for a while. Try to eat 8 apples.",
         speed: 12,
         next_level_requirements(snake){

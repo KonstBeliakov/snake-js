@@ -2,8 +2,7 @@ import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
 import {levels} from './levels.js'
 import {Item, APPLE} from './item.js'
-import {update_level_description} from './main.js'
-import {generate_random} from './utils.js'
+import {generate_random, update_level_description} from './utils.js'
 
 
 export class Board{
