@@ -7,7 +7,11 @@ import {generate_random} from './utils.js'
 
 
 export class Board{
-    constructor(level){
+    constructor(level) {
+        this.init(level)
+    }
+
+    init(level){
         this.canvas = document.getElementById('Canvas');
         update_level_description(level);
         this.level = level;
@@ -101,7 +105,7 @@ export class Board{
                 }
 
                 if(levels[this.level].next_level_requirements(this.snake))
-                    this.constructor(this.level + 1);
+                    this.init(this.level + 1);
 
                 this.next_tick();
             }, (1000 / this.snake.speed));

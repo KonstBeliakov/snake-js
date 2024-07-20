@@ -1,7 +1,39 @@
+body{
+    font-family: Arial, serif;
+    color: #11dd55;
+    margin-left: 100px;
+    margin-right: 100px;
+    background: #222;
+}
+
+header,footer{
+    background-color: #000;
+}
+
 h1{
-    color: blue;
+    color: #11dd55;
 }
 
 #tg_text{
     padding-left: 37px;
+}
+
+#levels{
+    text-align: center;
+    border-radius: 12px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    background: #333;
+}
+
+.level-button{
+    justify-content: center;
+    color: blue;
+    background: linear-gradient(to bottom, #aaccff, #aaffcc);
+    border-radius: 12px;
+    border: none;
+    padding: 10px 50px;
+    margin: 4px 50px;
 }

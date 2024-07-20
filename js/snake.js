@@ -95,9 +95,11 @@ export class Snake {
             if(headX === this.position[i][0] && headY === this.position[i][1])
                 return false
         }
-        if(board.squares != null && board.squares[headX][headY] === 1)
-            return false
-
-        return !(headX < 0 || headX >= boardSizeX || headY < 0 || headY >= boardSizeY);
+        if(headX < 0 || headX >= boardSizeX || headY < 0 || headY >= boardSizeY)
+            return false;
+        else if(board.squares != null && board.squares[headX][headY] === 1)
+            return false;
+        else 
+            return true;
     }
 }
