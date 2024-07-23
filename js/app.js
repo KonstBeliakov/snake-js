@@ -36,6 +36,8 @@ export class App{
     }
 
     start_level(level){
+        this.level = level;
+
         console.log('start')
         console.log(`level chosen: ${level}`);
 

@@ -7,14 +7,20 @@ import {generate_random} from './utils.js'
 
 export class Board{
     constructor(level, app) {
-        this.init(level)
         this.app = app;
+        this.snake = new Snake(level, app);
+
+        this.init(level);
     }
 
     init(level){
         this.canvas = document.getElementById('Canvas');
+
+        const context = this.canvas.getContext('2d');
+        context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
         this.level = level;
-        this.snake = new Snake(level, this.app);
+        this.snake.init(level);
 
         let item_position = [5, 8]
         if(levels[level].first_item_pos){
@@ -108,12 +114,12 @@ export class Board{
                     this.item.change_type(generate_random(levels[this.level].items))
                 }
 
-                if(levels[this.level].next_level_requirements(this.snake))
-                    alert('You win');
-
                 this.app.show_snake_effects(this.snake.effects)
 
-                this.next_tick();
+                if(levels[this.level].next_level_requirements(this.snake))
+                    this.app.start_level(this.level + 1);
+                else
+                    this.next_tick();
             }, (1000 / this.snake.speed));
         }
     }

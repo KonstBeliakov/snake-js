@@ -10,16 +10,19 @@ import {levels} from "./levels.js";
 
 export class Snake {
     constructor(level, app){
+        this.app = app;
+        this.init(level);
+    }
+
+    init(level){
+        this.direction = null;
+        this.effects = [];
         if (levels[level].snake_position){
-            this.position = levels[level].snake_position;
+            this.position = JSON.parse(JSON.stringify(levels[level].snake_position));
         }else {
             this.position = [[6, 5], [5, 5], [4, 5]];
         }
-        this.direction = null;
-        this.effects = [];
         this.speed = levels[level].speed;
-
-        this.app = app;
     }
 
     draw(canvas){
