@@ -15,6 +15,7 @@ export class Snake {
         this.direction = null;
         this.effects = [];
         this.speed = levels[level].speed;
+        this.level = level;
     }
 
     draw(canvas){
@@ -52,11 +53,9 @@ export class Snake {
                 this.direction = 'left'
                 break
         }
-        console.log(`snake direction: ${this.direction}`)
     }
 
     update(item){
-        console.log('snake update')
         let [headX, headY] = this.position[0];
         switch(this.direction) {
             case 'right':
@@ -78,14 +77,26 @@ export class Snake {
             show_level_progress(this.position.length - 3);
             switch (item.type){
                 case ACCELERATING_APPLE:
-                    this.effects.unshift(new Effect(FAST, this));
+                    this.effects.unshift(new Effect(FAST, 5000, this));
                     break;
                 case SLOWING_APPLE:
-                    this.effects.unshift(new Effect(SLOW, this));
+                    this.effects.unshift(new Effect(SLOW, 5000, this));
                     break;
             }
         }else if(this.direction !== null){
             this.position.pop();
+        }
+        this.checkEffects();
+    }
+
+    checkEffects(){
+        console.log(this.effects);
+        for(let i = this.effects.length - 1;i >= 0;i --){
+            console.log(i);
+            if(this.effects[i] && this.effects[i].is_over()){
+                console.log(`effect ${this.effects[i].type} is over`)
+                this.effects.splice(i, 1);
+            }
         }
     }
 
@@ -101,7 +112,7 @@ export class Snake {
             return false;
         else if(board.squares != null && board.squares[headX][headY] === 1)
             return false;
-        else 
+        else
             return true;
     }
 }

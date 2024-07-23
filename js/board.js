@@ -2,7 +2,7 @@ import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
 import {levels} from './levels.js'
 import {Item, APPLE} from './item.js'
-import {generate_random, update_level_description} from './utils.js'
+import {generate_random, show_snake_effects, update_level_description} from './utils.js'
 
 
 export class Board{
@@ -105,6 +105,8 @@ export class Board{
 
                 if(levels[this.level].next_level_requirements(this.snake))
                     this.init(this.level + 1);
+
+                show_snake_effects(this.snake.effects)
 
                 this.next_tick();
             }, (1000 / this.snake.speed));
