@@ -6,11 +6,10 @@ import {
 import {ACCELERATING_APPLE, SLOWING_APPLE} from "./item.js";
 import {FAST, Effect, SLOW} from "./effect.js";
 import {levels} from "./levels.js";
-import {show_level_progress} from "./utils.js";
 
 
 export class Snake {
-    constructor(level){
+    constructor(level, app){
         if (levels[level].snake_position){
             this.position = levels[level].snake_position;
         }else {
@@ -19,11 +18,12 @@ export class Snake {
         this.direction = null;
         this.effects = [];
         this.speed = levels[level].speed;
-        this.level = level;
+
+        this.app = app;
     }
 
     draw(canvas){
-        var snake_ctxs = [];
+        const snake_ctxs = [];
         for(let i = 0; i < this.position.length;i ++){
             snake_ctxs.push(canvas.getContext("2d"))
             snake_ctxs[i].beginPath();
@@ -78,7 +78,7 @@ export class Snake {
         [headX, headY] = this.position[0];
 
         if(item.x === headX && item.y === headY){
-            show_level_progress(this.position.length - 3);
+            this.app.show_level_progress(this.position.length - 3);
             switch (item.type){
                 case ACCELERATING_APPLE:
                     this.effects.unshift(new Effect(FAST, 5000, this));
@@ -114,9 +114,6 @@ export class Snake {
         }
         if(headX < 0 || headX >= boardSizeX || headY < 0 || headY >= boardSizeY)
             return false;
-        else if(board.squares != null && board.squares[headX][headY] === 1)
-            return false;
-        else
-            return true;
+        else return !(board.squares != null && board.squares[headX][headY] === 1);
     }
 }

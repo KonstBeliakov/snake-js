@@ -28,7 +28,7 @@ h1{
     background: #333;
 }
 
-.level-button{
+.level_button{
     justify-content: center;
     font-size: 24px;
     color: #0022aa;
@@ -57,7 +57,29 @@ progress{
     flex-direction: column;
 }
 
+#game_board{
+    display: flex;
+    flex-direction: row;
+}
+
+#game_header{
+    display: flex;
+    flex-direction: row;
+}
+
 #game{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu_restart{
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 24px;
+    color: #0022aa;
+}
+
+#buttons{
     display: flex;
     flex-direction: row;
 }

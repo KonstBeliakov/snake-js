@@ -12,16 +12,22 @@
     <hr>
 </header>
 <main>
-    <div id="levels">
-        <h2>Choose the level:</h2>
-    </div>
-
-    <div id="level_info"></div>
+    <div id="levels"></div>
 
     <div id="game">
-        <canvas id="Canvas" width="800" height="800"></canvas>
+        <div id="game_header">
+            <div id="level_info"></div>
+            <div id="buttons"></div>
+        </div>
+        <div id="progress_bar_div">
+            <progress id="level_progress_bar"></progress>
+        </div>
 
-        <div id="effect_div"></div>
+        <div id="game_board">
+            <canvas id="Canvas" width="800" height="800"></canvas>
+
+            <div id="effect_div"></div>
+        </div>
     </div>
 
     <script type='module' src="js/main.js"></script>
