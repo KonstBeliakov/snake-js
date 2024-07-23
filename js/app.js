@@ -49,12 +49,14 @@ export class App{
 
         const button_restart = document.createElement('button');
         button_restart.textContent = 'Restart';
+        button_restart.classList.add('menu_restart');
         button_restart.addEventListener('click', () => {
             this.start_level(level);
         });
 
         const button_main_menu = document.createElement('button');
         button_main_menu.textContent = 'Main menu';
+        button_main_menu.classList.add('menu_restart');
         button_main_menu.addEventListener('click', () => {
             this.main_menu();
         })

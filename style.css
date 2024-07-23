@@ -72,11 +72,18 @@ progress{
     flex-direction: column;
 }
 
+#buttons{
+    display: flex;
+    flex-direction: column;
+}
+
 .menu_restart{
+    background: linear-gradient(to bottom, #225533, #444444);
     padding: 5px;
+    margin: 20px 5px;
     border-radius: 8px;
     font-size: 24px;
-    color: #0022aa;
+    color: #11dd55;
 }
 
 #buttons{
