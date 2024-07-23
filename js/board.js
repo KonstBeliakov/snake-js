@@ -16,10 +16,15 @@ export class Board{
         this.level = level;
         this.snake = new Snake(level);
 
+        let item_position = [5, 8]
+        if(levels[level].first_item_pos){
+            item_position = levels[level].first_item_pos
+        }
+
         if(levels[level].first_item){
-            this.item = new Item(5, 8, levels[level].first_item, this.canvas);
+            this.item = new Item(item_position[0], item_position[1], levels[level].first_item, this.canvas);
         }else{
-            this.item = new Item(5, 8, APPLE, this.canvas);
+            this.item = new Item(item_position[0], item_position[1], APPLE, this.canvas);
         }
 
         this.running = true;

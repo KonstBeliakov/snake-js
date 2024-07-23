@@ -11,7 +11,11 @@ import {show_level_progress} from "./utils.js";
 
 export class Snake {
     constructor(level){
-        this.position = [[6, 5], [5, 5], [4, 5]];
+        if (levels[level].snake_position){
+            this.position = levels[level].snake_position;
+        }else {
+            this.position = [[6, 5], [5, 5], [4, 5]];
+        }
         this.direction = null;
         this.effects = [];
         this.speed = levels[level].speed;

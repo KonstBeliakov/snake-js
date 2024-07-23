@@ -103,23 +103,51 @@ export const levels = [
         },
         board: null,
         first_apple: ACCELERATING_APPLE,
-        items: [[APPLE, 40], [ACCELERATING_APPLE, 60]]
+        items: [[ACCELERATING_APPLE, 100]]
     },
     {
         name: "Level 7: Let's slow down",
         special: true,
-        description: "Yellow apples slow down the snake for a while. Try to eat 8 apples.",
+        description: "Yellow apples slow down the snake for a while. Try to eat 5 apples.",
         speed: 12,
+        max: 8,
+        next_level_requirements(snake){
+            return snake.position.length >= 8;
+        },
+        board: null,
+        first_item: SLOWING_APPLE,
+        items: [[SLOWING_APPLE, 100]]
+    },
+    {
+        name: "Level 8: Cave",
+        description: "Acceleration and deceleration on a map with many walls. Need 8 apples to move to the next level",
+        speed: 10,
         max: 11,
         next_level_requirements(snake){
             return snake.position.length >= 11;
         },
-        board: null,
-        first_item: SLOWING_APPLE,
-        items: [[SLOWING_APPLE, 60], [APPLE, 30], [ACCELERATING_APPLE, 10]]
+        board: [
+            [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+        ],
+        first_apple: ACCELERATING_APPLE,
+        items: [[SLOWING_APPLE, 40], [APPLE, 20], [ACCELERATING_APPLE, 40]]
     },
     {
-        name: "Level 8: Narrow passage",
+        name: "Level 9: Narrow passage",
         description: "Can you play with high precision at varying speeds? You need to eat 8 apples to pass.",
         speed: 10,
         max: 11,
@@ -144,6 +172,36 @@ export const levels = [
             [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
         ],
         first_apple: ACCELERATING_APPLE,
+        items: [[SLOWING_APPLE, 30], [APPLE, 30], [ACCELERATING_APPLE, 40]]
+    },
+    {
+        name: "Level 10: Circle",
+        description: "You need to eat 8 apples to pass.",
+        speed: 10,
+        max: 11,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ],
+        first_item_pos: [11, 2],
+        first_apple: ACCELERATING_APPLE,
+        snake_position: [[6, 2], [5, 2], [4, 2]],
         items: [[SLOWING_APPLE, 30], [APPLE, 30], [ACCELERATING_APPLE, 40]]
     },
 ]
