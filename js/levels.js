@@ -205,20 +205,7 @@ export const levels = [
         items: [[SLOWING_APPLE, 30], [APPLE, 30], [ACCELERATING_APPLE, 40]]
     },
     {
-        name: 'Level 11: Disorientated',
-        special: true,
-        description: "Eating a purple item inverts the controls for a while<br>You need to eat 4 apples to pass.",
-        speed: 10,
-        max: 7,
-        next_level_requirements(snake){
-            return snake.position.length >= 7;
-        },
-        board: null,
-        first_apple: DISORIENTATION_APPLE,
-        items: [[DISORIENTATION_APPLE, 100]]
-    },
-    {
-        name: 'Level 12: In the dark',
+        name: 'Level 11: In the dark',
         special: true,
         description: "Eating a dark purple item casts a darkness effect on you<br>You need to eat <b>10</b> apples to pass.",
         speed: 10,
@@ -231,7 +218,49 @@ export const levels = [
         items: [[DARKNESS_APPLE, 100]]
     },
     {
-        name: 'Level 13: All at once',
+        name: 'Level 12: Dark cave',
+        description: "Level with only darkness items and lots of walls.<br>You need to eat <b>8</b> apples to pass.",
+        speed: 10,
+        max: 11,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: [
+            [1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0]
+        ],
+        first_apple: DARKNESS_APPLE,
+        items: [[DARKNESS_APPLE, 100]]
+    },
+    {
+        name: 'Level 13: Disorientated',
+        special: true,
+        description: "Eating a purple item inverts the controls for a while<br>You need to eat 4 apples to pass.",
+        speed: 10,
+        max: 7,
+        next_level_requirements(snake){
+            return snake.position.length >= 7;
+        },
+        board: null,
+        first_apple: DISORIENTATION_APPLE,
+        items: [[DISORIENTATION_APPLE, 100]]
+    },
+
+    {
+        name: 'Level 14: All at once',
         description: "All previously unlocked items are found on this level.<br>You need to eat <b>8</b> apples to pass.",
         speed: 10,
         max: 11,
@@ -241,5 +270,61 @@ export const levels = [
         board: null,
         first_apple: DARKNESS_APPLE,
         items: [[SLOWING_APPLE, 25], [DISORIENTATION_APPLE, 25], [ACCELERATING_APPLE, 25], [DARKNESS_APPLE, 25]]
+    },
+    {
+        name: 'Level 15: Dark and confusing',
+        description: "Only darkness and disorientation items.<br>You need to eat <b>8</b> apples to pass.",
+        speed: 10,
+        max: 11,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: [
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        first_apple: DARKNESS_APPLE,
+        items: [[DISORIENTATION_APPLE, 40], [DARKNESS_APPLE, 60]]
+    },
+    {
+        name: 'Level 16: Coridor',
+        description: "All previously unlocked items are found on this level.<br>Speed is slightly reduced<br>You need to eat <b>8</b> apples to pass.",
+        speed: 8,
+        max: 11,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        ],
+        first_apple: DARKNESS_APPLE,
+        items: [[DISORIENTATION_APPLE, 40], [DARKNESS_APPLE, 60]]
     },
 ]
