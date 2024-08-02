@@ -207,14 +207,39 @@ export const levels = [
     {
         name: 'Level 11: Disorientated',
         special: true,
-        description: "Eating a purple item inverts the controls for a while<br>You need to eat 6 apples to pass.",
+        description: "Eating a purple item inverts the controls for a while<br>You need to eat 4 apples to pass.",
         speed: 10,
-        max: 9,
+        max: 7,
         next_level_requirements(snake){
-            return snake.position.length >= 9;
+            return snake.position.length >= 7;
         },
         board: null,
         first_apple: DISORIENTATION_APPLE,
         items: [[DISORIENTATION_APPLE, 100]]
+    },
+    {
+        name: 'Level 12: In the dark',
+        special: true,
+        description: "Eating a dark purple item casts a darkness effect on you<br>You need to eat <b>10</b> apples to pass.",
+        speed: 10,
+        max: 13,
+        next_level_requirements(snake){
+            return snake.position.length >= 13;
+        },
+        board: null,
+        first_apple: DARKNESS_APPLE,
+        items: [[DARKNESS_APPLE, 100]]
+    },
+    {
+        name: 'Level 13: All at once',
+        description: "All previously unlocked items are found on this level.<br>You need to eat <b>8</b> apples to pass.",
+        speed: 10,
+        max: 11,
+        next_level_requirements(snake){
+            return snake.position.length >= 11;
+        },
+        board: null,
+        first_apple: DARKNESS_APPLE,
+        items: [[SLOWING_APPLE, 25], [DISORIENTATION_APPLE, 25], [ACCELERATING_APPLE, 25], [DARKNESS_APPLE, 25]]
     },
 ]

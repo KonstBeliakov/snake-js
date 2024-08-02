@@ -1,11 +1,11 @@
 import {
     boardSizeX,
     boardSizeY,
-    squareSize,
 } from './settings.js'
 import {ACCELERATING_APPLE, DARKNESS_APPLE, DISORIENTATION_APPLE, SLOWING_APPLE} from "./item.js";
 import {FAST, Effect, SLOW, DARKNESS, DISORIENTATION} from "./effect.js";
 import {levels} from "./levels.js";
+import {rgbToHex} from "./utils.js";
 
 
 export class Snake {
@@ -24,23 +24,17 @@ export class Snake {
         }
         this.speed = levels[level].speed;
 
-        this.disorientation = false;
-        this.darkness = false;
+        this.disorientation = 0;
+        this.darkness = 0;
     }
 
-    draw(canvas){
-        const snake_ctxs = [];
+    draw(){
         for(let i = 0; i < this.position.length;i ++){
-            snake_ctxs.push(canvas.getContext("2d"))
-            snake_ctxs[i].beginPath();
             let g = 255 - i * 10;
-            snake_ctxs[i].fillStyle = `rgb(0, ${g}, 0)`;
-
-            let x = this.position[i][0] * (squareSize + 2);
-            let y = this.position[i][1] * (squareSize + 2);
-
-            snake_ctxs[i].rect(x, y, squareSize, squareSize)
-            snake_ctxs[i].fill()
+            this.app.board.draw_square(this.position[i][0],
+                this.position[i][1],
+                rgbToHex(0, g, 0),
+                this.darkness)
         }
     }
 
@@ -100,7 +94,7 @@ export class Snake {
                     this.effects.unshift(new Effect(DISORIENTATION, 5000, this));
                     break;
                 case DARKNESS_APPLE:
-                    this.effects.unshift(new Effect(DARKNESS, 5000, this));
+                    this.effects.unshift(new Effect(DARKNESS, 10000, this));
                     break;
             }
         }else if(this.direction !== null){

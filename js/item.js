@@ -1,4 +1,4 @@
-import {boardSizeX, boardSizeY, squareSize} from "./settings.js";
+import {boardSizeX, boardSizeY} from "./settings.js";
 
 
 // --------------- CONSTANTS ---------------
@@ -11,11 +11,12 @@ export const DARKNESS_APPLE = 4;
 
 
 export class Item{
-    constructor(x, y, type, canvas){
+    constructor(x, y, type, canvas, app){
         this.x = x;
         this.y = y;
         this.type = type;
         this.canvas = canvas;
+        this.app = app;
     }
 
     draw(){
@@ -40,10 +41,7 @@ export class Item{
                 color = '#330055'
                 break;
         }
-        this.item_ctx.fillStyle = color;
-
-        this.item_ctx.rect(this.x * (squareSize + 2), this.y * (squareSize + 2), squareSize, squareSize);
-        this.item_ctx.fill();
+        this.app.draw_square(this.x, this.y, color, this.app.snake.darkness)
     }
 
     move(board){

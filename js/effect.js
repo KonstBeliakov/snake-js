@@ -25,11 +25,11 @@ export class Effect{
                 break;
             case DISORIENTATION:
                 this.name = 'Disoriented'
-                snake.disorientation = true;
+                snake.disorientation += 1;
                 break;
             case DARKNESS:
                 this.name = 'Darkness'
-                snake.darkness = true;
+                snake.darkness += 1;
                 break;
         }
     }
@@ -45,10 +45,10 @@ export class Effect{
                     this.snake.speed *= 1.5;
                     break;
                 case DISORIENTATION:
-                    this.snake.disorientation = false;
+                    this.snake.disorientation -= 1;
                     break;
                 case DARKNESS:
-                    this.snake.darkness = false;
+                    this.snake.darkness -= 1;
                     break;
             }
             return true

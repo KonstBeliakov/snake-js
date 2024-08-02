@@ -2,13 +2,15 @@ import {boardSizeX, boardSizeY, squareSize,} from './settings.js'
 import {Snake} from "./snake.js";
 import {levels} from './levels.js'
 import {Item, APPLE} from './item.js'
-import {generate_random} from './utils.js'
+import {generate_random, draw_square, dist, hexToRgb} from './utils.js'
 
 
 export class Board{
     constructor(level, app) {
         this.app = app;
         this.snake = new Snake(level, app);
+
+        this.bg_color = "#202020"
 
         this.init(level);
     }
@@ -20,7 +22,7 @@ export class Board{
         context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.level = level;
-        this.snake.init(level);
+        this.snake.init(level, this.app);
 
         let item_position = [5, 8]
         if(levels[level].first_item_pos){
@@ -28,9 +30,9 @@ export class Board{
         }
 
         if(levels[level].first_item){
-            this.item = new Item(item_position[0], item_position[1], levels[level].first_item, this.canvas);
+            this.item = new Item(item_position[0], item_position[1], levels[level].first_item, this.canvas, this);
         }else{
-            this.item = new Item(item_position[0], item_position[1], APPLE, this.canvas);
+            this.item = new Item(item_position[0], item_position[1], APPLE, this.canvas, this);
         }
 
         this.running = true;
@@ -56,31 +58,34 @@ export class Board{
         this.item.draw(this.canvas)
     }
 
+    draw_square(x, y, color, darkness){
+        let color1 = color;
+        if(darkness){
+            let [bg_r, bg_g, bg_b] = [hexToRgb(this.bg_color).r, hexToRgb(this.bg_color).g, hexToRgb(this.bg_color).b];
+            let rgb_color = hexToRgb(color);
+            let d = dist(this.snake.position[0][0], this.snake.position[0][1], x, y);
+            let brightness = 1 / (1 + (d * (0.3 * (darkness - 1)) + (0.05 + 0.2 * (darkness - 1)) * d * d) + (darkness - 1) * 0.02 * x * x * x);
+            color1 = `rgb(${(rgb_color.r - bg_r) * brightness + bg_r}, ${(rgb_color.g - bg_g) * brightness + bg_g}, ${(rgb_color.b - bg_b) * brightness + bg_b})`
+        }
+        draw_square(this.canvas, x, y, squareSize, squareSize, color1);
+    }
+
     draw(canvas) {
         // drawing empty squares of the board
-        const board_ctx = this.canvas.getContext("2d");
-        board_ctx.beginPath();
-        board_ctx.fillStyle = '#666666';
-
         for(let i = 0;i < boardSizeX;i ++){
             for(let j = 0;j < boardSizeY;j ++){
                 if(this.squares[i][j] !== 1)
-                    board_ctx.rect(i * (squareSize + 2), j * (squareSize + 2), squareSize, squareSize);
+                    this.draw_square(i, j, '#666666', this.snake.darkness);
             }
         }
-        board_ctx.fill()
 
         // drawing walls
-        const wall_ctx = this.canvas.getContext("2d");
-        wall_ctx.beginPath();
-        wall_ctx.fillStyle = '#222222';
         for(let i = 0;i < boardSizeX;i ++){
             for(let j = 0;j < boardSizeY;j ++){
                 if(this.squares[i][j] === 1)
-                    wall_ctx.rect(i * (squareSize + 2), j * (squareSize + 2), squareSize, squareSize)
+                    draw_square(this.canvas, i, j, squareSize, squareSize, '#222222');
             }
         }
-        wall_ctx.fill()
 
         this.drawFood(canvas);
     }
@@ -104,7 +109,7 @@ export class Board{
         }else{
             setTimeout(() => {
                 this.draw();
-                this.snake.draw(this.canvas);
+                this.snake.draw();
                 this.drawFood();
                 this.snake.update(this.item);
                 this.running = this.snake.checkGameOver(this);
