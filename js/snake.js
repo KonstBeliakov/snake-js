@@ -3,8 +3,8 @@ import {
     boardSizeY,
     squareSize,
 } from './settings.js'
-import {ACCELERATING_APPLE, SLOWING_APPLE} from "./item.js";
-import {FAST, Effect, SLOW} from "./effect.js";
+import {ACCELERATING_APPLE, DARKNESS_APPLE, DISORIENTATION_APPLE, SLOWING_APPLE} from "./item.js";
+import {FAST, Effect, SLOW, DARKNESS, DISORIENTATION} from "./effect.js";
 import {levels} from "./levels.js";
 
 
@@ -23,6 +23,9 @@ export class Snake {
             this.position = [[6, 5], [5, 5], [4, 5]];
         }
         this.speed = levels[level].speed;
+
+        this.disorientation = false;
+        this.darkness = false;
     }
 
     draw(canvas){
@@ -42,24 +45,28 @@ export class Snake {
     }
 
     updateDirection(key){
+        let direction = null
         switch (key){
             case 'w':
-                if(this.direction !== 'down')
-                    this.direction = "up";
-                break
+                direction = "up";
+                break;
             case 'd':
-                if(this.direction !== 'left')
-                    this.direction = 'right';
-                break
+                direction = 'right';
+                break;
             case 's':
-                if(this.direction !== 'up')
-                    this.direction = 'down';
-                break
+                direction = 'down';
+                break;
             case 'a':
-                if(this.direction !== 'right' && this.direction !== null)
-                this.direction = 'left'
-                break
+                if(this.direction !== null)
+                    direction = 'left'
+                break;
         }
+        let reversed = {'left': 'right', 'right': 'left', 'up': 'down', 'down': 'up'}
+        if(this.disorientation)
+            direction = reversed[direction];
+
+        if(direction !== reversed[this.direction])
+            this.direction = direction
     }
 
     update(item){
@@ -88,6 +95,12 @@ export class Snake {
                     break;
                 case SLOWING_APPLE:
                     this.effects.unshift(new Effect(SLOW, 5000, this));
+                    break;
+                case DISORIENTATION_APPLE:
+                    this.effects.unshift(new Effect(DISORIENTATION, 5000, this));
+                    break;
+                case DARKNESS_APPLE:
+                    this.effects.unshift(new Effect(DARKNESS, 5000, this));
                     break;
             }
         }else if(this.direction !== null){

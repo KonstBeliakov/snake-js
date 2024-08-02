@@ -1,4 +1,4 @@
-import {ACCELERATING_APPLE, APPLE, SLOWING_APPLE} from "./item.js";
+import {ACCELERATING_APPLE, APPLE, DARKNESS_APPLE, DISORIENTATION_APPLE, SLOWING_APPLE} from "./item.js";
 
 
 export const levels = [
@@ -203,5 +203,18 @@ export const levels = [
         first_apple: ACCELERATING_APPLE,
         snake_position: [[6, 2], [5, 2], [4, 2]],
         items: [[SLOWING_APPLE, 30], [APPLE, 30], [ACCELERATING_APPLE, 40]]
+    },
+    {
+        name: 'Level 11: Disorientated',
+        special: true,
+        description: "Eating a purple item inverts the controls for a while<br>You need to eat 6 apples to pass.",
+        speed: 10,
+        max: 9,
+        next_level_requirements(snake){
+            return snake.position.length >= 9;
+        },
+        board: null,
+        first_apple: DISORIENTATION_APPLE,
+        items: [[DISORIENTATION_APPLE, 100]]
     },
 ]

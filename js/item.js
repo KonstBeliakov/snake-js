@@ -5,6 +5,8 @@ import {boardSizeX, boardSizeY, squareSize} from "./settings.js";
 export const APPLE = 0;
 export const ACCELERATING_APPLE = 1;
 export const SLOWING_APPLE = 2;
+export const DISORIENTATION_APPLE = 3;
+export const DARKNESS_APPLE = 4;
 // -----------------------------------------
 
 
@@ -20,17 +22,25 @@ export class Item{
         this.item_ctx = this.canvas.getContext("2d");
         this.item_ctx.beginPath();
 
+        let color = '#fff'
         switch(this.type){
             case APPLE:
-                this.item_ctx.fillStyle = '#cc3333';
+                color = '#cc3333';
                 break;
             case ACCELERATING_APPLE:
-                this.item_ctx.fillStyle = '#3333cc';
+                color ='#3333cc';
                 break;
             case SLOWING_APPLE:
-                this.item_ctx.fillStyle = '#cccc33'
+                color = '#cccc33'
+                break;
+            case DISORIENTATION_APPLE:
+                color = '#cc33cc';
+                break;
+            case DARKNESS_APPLE:
+                color = '#330055'
                 break;
         }
+        this.item_ctx.fillStyle = color;
 
         this.item_ctx.rect(this.x * (squareSize + 2), this.y * (squareSize + 2), squareSize, squareSize);
         this.item_ctx.fill();

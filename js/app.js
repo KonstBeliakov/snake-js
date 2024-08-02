@@ -15,7 +15,7 @@ export class App{
         document.getElementById('game').style.display = 'none';
         document.getElementById('levels').innerHTML = '<h2>Choose the level:</h2>';
         const buttons = [];
-        for(let i = 0;i < 10;i ++){
+        for(let i = 0;i < levels.length;i ++){
             buttons.push(document.createElement("button"));
             buttons[i].classList.add('level_button');
             buttons[i].textContent = levels[i + 1].name;
@@ -81,7 +81,7 @@ export class App{
         level_name.textContent = levels[level].name;
 
         let level_description = document.createElement("p");
-        level_description.textContent = levels[level].description;
+        level_description.innerHTML = levels[level].description;
 
         level_info.append(level_name);
         level_info.append(level_description);
@@ -105,7 +105,7 @@ export class App{
 
             console.log(`effect type: ${effect.type}`)
 
-            effect_text.textContent = ['Fast', 'Slow'][effect.type];
+            effect_text.textContent = effect.name;
 
             effect_div.append(effect_text);
 
